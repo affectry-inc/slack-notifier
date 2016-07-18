@@ -1,6 +1,6 @@
 require 'json'
 require 'open-uri'
-require 'slack-incoming-webhooks'
+require 'slack/incoming/webhooks'
 
 if ARGV[0] =~ /^[0-9]{6}$/ # check if a number of 6 digits
   uri = "http://weather.livedoor.com/forecast/webservice/json/v1?city=#{ARGV[0]}"
@@ -21,4 +21,4 @@ attachments = [{
 }]
 
 slack = Slack::Incoming::Webhooks.new ENV['WEBHOOK_URL']
-slack.post "#{weather['date']}の#{title}は「#{weather['telop']}」です。", attachments: attachments
+slack.post "#{weather['dateLabel']}の#{title}は#{weather['telop']}だってさ。", attachments: attachments
